@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+"use strict"
+const { program } = require('commander');
+const { resolve } = require('path');
+const { pathExistsSync } = require('fs-extra');
+const cwd = process.cwd();
+
+program.option('-c, --config <config>', 'configure file');
+program.parse();
+
+const options = program.opts()
+
+if (!options.config) {
+  console.error('ts-mock-server: config file missed');
+  process.exit();
+}
+
+const configFilePath = resolve(cwd, options.config);
+
+const exists = pathExistsSync(configFilePath);
+if (!exists) {
+  console.error('ts-mock-server: config file not exist');
+  process.exit();
+}
+
+const config = require(configFilePath);
+
+require('../index.js').start(config);
