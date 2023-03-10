@@ -66,13 +66,22 @@ const generate = async (method, requestPath) => {
 
 const startServer = () => {
   const app = express();
+  app.options('*', (req, res) => {
+    res.set('Access-Control-Allow-Origin', req.get('origin'));
+    res.set('Access-Control-Allow-Headers', req.get('Access-Control-Request-Headers'));
+    res.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE');
+    res.set('Access-Control-Max-Age', 86400);
+    res.end();
+  });
   app.use('*', (req, res) => {
     generate(req.method, req.baseUrl)
       .then((data) => {
+        res.set('Access-Control-Allow-Origin', req.get('origin'));
         res.end(generateResponse({
           data
         }, 'success'));
       }).catch((err) => {
+        res.set('Access-Control-Allow-Origin', req.get('origin'));
         res.end(generateResponse({
           message: err.message || ''
         }, 'error'));
