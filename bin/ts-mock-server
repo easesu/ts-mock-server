@@ -25,4 +25,4 @@ if (!exists) {
 
 const config = require(configFilePath);
 
-require('../index.js').start(config);
+require('../dist/index.js').start(config);
