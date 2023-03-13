@@ -18,6 +18,7 @@ module.exports = {
   port: 9876,
   dir: resolve(__dirname, './mock'),
   tsRoot: __dirname,
+  cacheSchema: true,
   template: {
     success: successTemplate,
     error: errorTemplate
