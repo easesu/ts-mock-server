@@ -1,5 +1,4 @@
 package-lock.json
 .vscode
-mock
 node_modules
 dist
