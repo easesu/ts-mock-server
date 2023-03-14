@@ -37,6 +37,7 @@ tms.start({
   port: 9876,
   dir: resolve(__dirname, './mock'),
   tsRoot: __dirname,
+  cacheSchema: true,
   template: {
     success: '{ "code": 0, "data": $data }',
     error: '{ "code": 9999, "message": $message }'
@@ -58,6 +59,10 @@ tms.start({
 + `tsRoot`
 
   tsconfig.json root
+
++ `cacheSchema`
+
+  是否开启schema缓存，开启缓存可以加速请求，否则每次请求都会实时解析，耗时较长
 
 + `template`
 
